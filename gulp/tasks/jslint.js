@@ -13,7 +13,6 @@ gulp.task('jslint', () => {
 	// run task
 	const run = (e, path) => {
 		gulp.src(src + 'js/**/*.js')
-//		gulp.src(__dirname + '**/*.js')
 			.pipe(jscs())
     		.pipe(jscs.reporter());
 	};
