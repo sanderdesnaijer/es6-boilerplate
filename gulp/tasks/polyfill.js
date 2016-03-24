@@ -5,6 +5,8 @@ const gutil = require('gulp-util');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
+const uglify = require('gulp-uglify');
+const buffer = require('vinyl-buffer');
 const config = require('../config.json');
 
 // build js file
@@ -25,6 +27,8 @@ gulp.task('polyfill', () => {
 				.bundle()
 				.on('error', gutil.log)
 				.pipe(source('polyfill.js'))
+				.pipe(buffer())
+				.pipe(uglify())
 				.pipe(gulp.dest(dest + 'js/'));;
 		};
 	

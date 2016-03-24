@@ -7,6 +7,8 @@ const source = require('vinyl-source-stream');
 const watchify = require('watchify');
 const babelify = require('babelify');
 const config = require('../config.json');
+const uglify = require('gulp-uglify');
+const buffer = require('vinyl-buffer');
 
 // build js file
 gulp.task('scripts', () => {
@@ -32,7 +34,6 @@ gulp.task('scripts', () => {
 			// watchify task
 			if (gutil.env.dev) {
 				bundler = watchify(bundler).on('log', ev => gutil.log(ev));
-				//bundler;	
 			};
 
 			bundler.transform(babelify);
@@ -42,10 +43,19 @@ gulp.task('scripts', () => {
 				ev !== undefined ? gutil.log(ev) : false;	
 
 				// build stream
-				return bundler.bundle()
-					.on('error', gutil.log)
-					.pipe(source('scripts.js'))
-					.pipe(gulp.dest(dest + 'js/'));
+				if (gutil.env.dev) {
+					return bundler.bundle()
+						.on('error', gutil.log)
+						.pipe(source('scripts.js'))		
+						.pipe(gulp.dest(dest + 'js/'));
+				} else {
+					return bundler.bundle()
+						.on('error', gutil.log)
+						.pipe(source('scripts.js'))		
+						.pipe(buffer())			
+						.pipe(uglify())
+						.pipe(gulp.dest(dest + 'js/'));
+				};			
   			};
 
 
