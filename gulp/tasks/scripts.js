@@ -22,7 +22,7 @@ gulp.task('scripts', () => {
 
 			// browserify options
 			bundler = browserify(entry, {
-				debug : true,
+				debug : gutil.env.dev,
 				cache : {},
 				basedir: src,
 				packageCache : {},
