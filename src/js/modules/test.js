@@ -1,7 +1,9 @@
 'use strict';
 
-let test = (el) => {
-	console.log(el);
+const test = () => {
+	let hellowWorld = 'hello';
+	hellowWorld += 'world';
+	return hellowWorld;
 };
 
 export default test;

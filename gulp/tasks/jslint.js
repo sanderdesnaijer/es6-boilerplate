@@ -1,20 +1,20 @@
 const gulp  = require('gulp');
-const gutil = require('gulp-util');
-const jscs = require('gulp-jscs');	
+const gutil = require('gulp-util')
+const eslint = require('gulp-eslint');
 const config = require('../config.json');
 
 // lint js code
 gulp.task('jslint', () => {
-	
+
 	// src
 	const filePath = 'js/**/*.js';
 	const src = config.paths.src;
 
 	// run task
 	const run = (e, path) => {
-		gulp.src(src + 'js/**/*.js')
-			.pipe(jscs())
-    		.pipe(jscs.reporter());
+		return gulp.src([src + filePath,'!node_modules/**'])
+			.pipe(eslint())
+			.pipe(eslint.format());
 	};
 
 	// watch task
