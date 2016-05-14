@@ -10,6 +10,10 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+		"comma-dangle" : [
+			"error",
+			"never"
+		],
         "indent": [
             "error",
             "tab"
