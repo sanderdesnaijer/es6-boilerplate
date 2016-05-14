@@ -3,7 +3,7 @@
 Simple es6 boilerplate with gulp tasks as:
 
   - browserify, watchify and babelify
-  - jscs linter
+  - eslint
   - sass
 
 ### Installation
